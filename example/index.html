@@ -1,0 +1,50 @@
+<html>
+<script type="text/javascript">
+    // Wait until the DOM has loaded
+    document.addEventListener('DOMContentLoaded', (e) => {
+        // Identify the RSS feed titles on the page
+        const rssTitles = document.getElementsByClassName('wp-block-rss__item-title');
+        // For each RSS title
+        for (let i = 0; i < rssTitles.length; i++) {
+            // Find the article title <a> element (we do not want to disturb the URL)
+            const articleLink = rssTitles[i].querySelector('a');
+            // Replace the inner HTML of the article link 
+            // element with the plain text string that WordPress
+            // is rendering as HTML when decoding special characters
+            articleLink.innerHTML = rssTitles[i].textContent;
+        }
+    });
+</script>
+
+<body>
+    <ul class="wp-block-rss">
+        <li class="wp-block-rss__item">
+            <div class="wp-block-rss__item-title"><a
+                    href="https://profiles.wustl.edu/en/publications/genetic-deletion-of-skeletal-muscle-iplasub2sub%CE%B3-results-in-mitoc">Genetic
+                    deletion of skeletal muscle iPLA&lt;sub&gt;2&lt;/sub&gt;γ results in mitochondrial dysfunction,
+                    muscle atrophy and alterations in whole-body energy metabolism</a></div>
+        </li>
+        <li class="wp-block-rss__item">
+            <div class="wp-block-rss__item-title"><a
+                    href="https://profiles.wustl.edu/en/publications/cardiac-immune-cell-infiltration-associates-with-abnormal-lipid-m">Cardiac
+                    immune cell infiltration associates with abnormal lipid metabolism</a></div>
+        </li>
+        <li class="wp-block-rss__item">
+            <div class="wp-block-rss__item-title"><a
+                    href="https://profiles.wustl.edu/en/publications/the-foundations-and-development-of-lipidomics">The
+                    foundations and development of lipidomics</a></div>
+        </li>
+        <li class="wp-block-rss__item">
+            <div class="wp-block-rss__item-title"><a
+                    href="https://profiles.wustl.edu/en/publications/high-fat-diet-activates-liver-ipla2%CE%B3-generating-eicosanoids-that-">High-fat
+                    diet activates liver iPLA2γ generating eicosanoids that mediate metabolic stress</a></div>
+        </li>
+        <li class="wp-block-rss__item">
+            <div class="wp-block-rss__item-title"><a
+                    href="https://profiles.wustl.edu/en/publications/nutritional-modulation-of-heart-failure-in-mitochondrial-pyruvate">Nutritional
+                    modulation of heart failure in mitochondrial pyruvate carrier–deficient mice</a></div>
+        </li>
+    </ul>
+</body>
+
+</html>
