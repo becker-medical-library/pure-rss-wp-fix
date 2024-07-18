@@ -57,3 +57,11 @@ Clone the repository if you like or copy and paste from the files directly. Ther
 #### Embedded Script
 
 <img src="./screenshots/wp-custom-html-block.png" alt="Content in WordPress Custom HTML Block" width="600px" />
+
+#### Display Before
+
+<img src="./screenshots/rss-before.png" alt="Screenshot of feed before fix" width="600px" />
+
+#### Display After
+
+<img src="./screenshots/rss-after.png" alt="Screenshot of feed after fix" width="600px" />
