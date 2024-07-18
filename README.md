@@ -14,7 +14,7 @@ Many departments at the School of Medicine are presenting recent research output
 
 ## Prerequisites
 
-Other than the ability to add a 'Custom HTML Block' to a WordPress page or post, there are no technical prerequisites. This plain JavaScript that will be executed by the browser.
+Other than the ability to add a 'Custom HTML Block' to a WordPress page or post, there are no technical prerequisites. This is plain JavaScript that will be executed by the browser.
 
 ## Installation
 
