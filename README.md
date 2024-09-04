@@ -26,7 +26,7 @@ Clone the repository if you like or copy and paste from the files directly. Ther
 
 ### OR
 
-- Add a WordPress 'Custom HTML Block' on the target pages of interest and place the contents of the `wp-rss-fix-embeddable.js` file there, wrapped with `<script>` tags. The primary difference is that the embeddable version uses an obnoxious nexting of `if` conditional statements due to WordPress' escaping/encoding of the `&&` comparison operator when attempting to combine conditions in one line. Working example below:
+- Add a WordPress 'Custom HTML Block' on the target pages of interest and place the contents of the `wp-rss-fix-embeddable.js` file there, wrapped with `<script>` tags. <u>The primary difference is that the embeddable version uses an obnoxious nexting of `if` conditional statements due to WordPress' escaping/encoding of the `&&` comparison operator when attempting to combine conditions in one line</u>. Working example below:
 
 ```javascript
 <script>
