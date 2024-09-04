@@ -30,6 +30,7 @@ Clone the repository if you like or copy and paste from the files directly. Ther
 
 ```javascript
 <script>
+// Embeddable version. Copy/paste and wrap in <script> tags.
 // Script to fix WordPress special character 
 // rendering in RSS feeds.
 
@@ -45,20 +46,32 @@ document.addEventListener('DOMContentLoaded', (e) => {
 function pureRSSCleaner(title, excerpt) {
     // Define a regular expression pattern to check for HTML elements
     const re = /<[a-zA-Z]+>/;
+
     // Identify the RSS feed items on the page
     const rssItems = document.getElementsByClassName('wp-block-rss__item');
 
+    // For each item in the feed
     for (let i = 0; i < rssItems.length; i++) {
         // Attempt to store the associated title and excerpt
         const itemTitle = rssItems[i].getElementsByClassName('wp-block-rss__item-title');
         const itemExcerpt = rssItems[i].getElementsByClassName('wp-block-rss__item-excerpt');
-        // If `excerpt` is set to true and the itemTitle and itemExcerpt exists,
-        // strip the title content from the excerpt
-        // If 'title' is set to true and the itemTitle exists
-        if (title) {
-            if (itemTitle.length > 0) {
-                // Find the article title <a> element (we do not want to disturb the URL)
-                const itemTitleLink = itemTitle[0].querySelector('a');
+
+        // Create a shadow element to store corrected title.
+        // This is useful in the event where it is
+        // desired to rewrite the excerpt but
+        // not the title.
+        const shadowTitle = document.createElement('a');
+
+        // Confirm that the title exists before attempting to access
+        if (itemTitle.length > 0) {
+            // Find the article title <a> element (we do not want to disturb the URL)
+            const itemTitleLink = itemTitle[0].querySelector('a');
+            
+            // Set the shadowTitle.innerHTML to the textContent of the itemTitle
+            shadowTitle.innerHTML = itemTitle[0].textContent;
+
+            // If 'title' is set to true and the itemTitle exists
+            if (title) {
                 // If the text content of the article link 
                 // contains HTML elements,replace the inner HTML 
                 // of the article link element with the plain text string 
@@ -68,11 +81,14 @@ function pureRSSCleaner(title, excerpt) {
                 }
             }
         }
+
+        // If `excerpt` is set to true and the itemTitle and itemExcerpt exists,
+        // strip the title content from the excerpt
         if (excerpt) {
             if (itemTitle.length > 0) {
                 if (itemExcerpt.length > 0) {
                     let excerptContent = itemExcerpt[0].textContent;
-                    let titleContent = itemTitle[0].textContent;
+                    let titleContent = shadowTitle.textContent;
                     // Remove extra whitespace and breaks from title
                     titleContent = titleContent.replace(/\s\s+/g, " ");
                     // Remove extra whitespace and breaks from excerpt
