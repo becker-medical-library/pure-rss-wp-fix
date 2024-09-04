@@ -1,6 +1,11 @@
-// For use with wp_enqueue_script(), theme or plugin level. Not embeddable.
+// Embeddable version. Copy/paste and wrap in <script> tags.
 // Script to fix WordPress special character 
 // rendering in RSS feeds.
+
+// After the DOM has loaded, call pureRSSCleaner
+document.addEventListener('DOMContentLoaded', (e) => {
+    pureRSSCleaner(true, true);
+});
 
 // pureRSSCleaner corrects improperly encoded HTML
 // tags in RSS item titles and also strips
@@ -25,11 +30,11 @@ function pureRSSCleaner(title, excerpt) {
         // not the title.
         const shadowTitle = document.createElement('a');
 
-        // If 'title' is set to true and the itemTitle exists
+        // Confirm that the title exists before attempting to access
         if (itemTitle.length > 0) {
             // Find the article title <a> element (we do not want to disturb the URL)
             const itemTitleLink = itemTitle[0].querySelector('a');
-
+            
             // Set the shadowTitle.innerHTML to the textContent of the itemTitle
             shadowTitle.innerHTML = itemTitle[0].textContent;
 
@@ -47,17 +52,21 @@ function pureRSSCleaner(title, excerpt) {
 
         // If `excerpt` is set to true and the itemTitle and itemExcerpt exists,
         // strip the title content from the excerpt
-        if (excerpt && itemTitle.length > 0 && itemExcerpt.length > 0) {
-            let excerptContent = itemExcerpt[0].textContent;
-            let titleContent = shadowTitle.textContent;
-            // Remove extra whitespace and breaks from title
-            titleContent = titleContent.replace(/\s\s+/g, " ");
-            // Remove extra whitespace and breaks from excerpt
-            excerptContent = excerptContent.replace(/\s\s+/g, " ");
-            // Remove titleContent from excerptContent
-            excerptContent = excerptContent.replace(titleContent, "");
-            // Replace original item excerpt with cleaned content
-            itemExcerpt[0].textContent = excerptContent;
+        if (excerpt) {
+            if (itemTitle.length > 0) {
+                if (itemExcerpt.length > 0) {
+                    let excerptContent = itemExcerpt[0].textContent;
+                    let titleContent = shadowTitle.textContent;
+                    // Remove extra whitespace and breaks from title
+                    titleContent = titleContent.replace(/\s\s+/g, " ");
+                    // Remove extra whitespace and breaks from excerpt
+                    excerptContent = excerptContent.replace(/\s\s+/g, " ");
+                    // Remove titleContent from excerptContent
+                    excerptContent = excerptContent.replace(titleContent, "");
+                    // Replace original item excerpt with cleaned content
+                    itemExcerpt[0].textContent = excerptContent;
+                }
+            }
         }
     }
 }
