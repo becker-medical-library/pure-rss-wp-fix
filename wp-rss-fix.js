@@ -61,3 +61,17 @@ function pureRSSCleaner(title, excerpt) {
         }
     }
 }
+
+// hideRSSErrors suppresses the display of the WordPress 'RSS Error'
+// notice when a problem with the RSS link arises.
+function hideRSSErrors() {
+    // Identify all of the component-placeholder div elements
+    const componentsPlaceholders = document.getElementsByClassName('components-placeholder');
+
+    // For each component, hide if it contains the text "RSS Error"
+    for (let i = 0; i < componentsPlaceholders.length; i++) {
+        if (componentsPlaceholders[i].textContent.includes("RSS Error")) {
+            componentsPlaceholders[i].style.display = "none";
+        }
+    }
+}
