@@ -1,4 +1,4 @@
-# Pure RSS — WordPress RSS Block Render Fix v.2.0.0
+# Pure RSS — WordPress RSS Block Render Fix v.2.1.0
 
 A sample script for fixing incorrectly rendered article titles in WordPress RSS blocks.
 
@@ -37,6 +37,7 @@ Clone the repository if you like or copy and paste from the files directly. Ther
 // After the DOM has loaded, call pureRSSCleaner
 document.addEventListener('DOMContentLoaded', (e) => {
     pureRSSCleaner(true, true);
+    hideRSSErrors();
 });
 
 // pureRSSCleaner corrects improperly encoded HTML
@@ -102,9 +103,25 @@ function pureRSSCleaner(title, excerpt) {
         }
     }
 }
+
+// hideRSSErrors suppresses the display of the WordPress 'RSS Error'
+// notice when a problem with the RSS link arises.
+function hideRSSErrors() {
+    // Identify all of the component-placeholder div elements
+    const componentsPlaceholders = document.getElementsByClassName('components-placeholder');
+
+    // For each component, hide if it contains the text "RSS Error"
+    for (let i = 0; i < componentsPlaceholders.length; i++) {
+        if (componentsPlaceholders[i].textContent.includes("RSS Error")) {
+            componentsPlaceholders[i].style.display = "none";
+        }
+    }
+}
 </script>
 ```
 The primary function `pureRSSCleaner(title, excerpt)` accepts two parameters, both booleans, that allow you to address issues related to the titles, excerpts, or both.
+
+The additional function `hideRSSError()` just needs to be called.
 
 ### Sample screenshots from within WordPress
 
